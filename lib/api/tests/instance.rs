@@ -5,6 +5,16 @@ use wasm_bindgen_test::*;
 use wasmer::*;
 
 #[universal_test]
+fn check_backend() -> Result<(), String> {
+    #[cfg(feature = "wamr")]
+    {
+        assert!(WASMER_WAMR)
+    }
+
+    Ok(())
+}
+
+#[universal_test]
 fn exports_work_after_multiple_instances_have_been_freed() -> Result<(), String> {
     let mut store = Store::default();
     let module = Module::new(
@@ -49,6 +59,10 @@ fn exports_work_after_multiple_instances_have_been_freed() -> Result<(), String>
 }
 
 #[universal_test]
+#[cfg_attr(
+    feature = "wasm-c-api",
+    ignore = "wasm-c-api does not support function calls without an instance"
+)]
 fn unit_native_function_env() -> Result<(), String> {
     let mut store = Store::default();
 
