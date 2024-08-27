@@ -15,7 +15,7 @@ version.workspace = true
 [dependencies]
 memoffset.workspace = true
 dashmap.workspace = true
-hc-wasmer-types = { path = "../types", version = "=4.3.6-hc.0" }
+wasmer-types = { package = "hc-wasmer-types", path = "../types", version = "=4.3.6-hc.0" }
 libc.workspace = true
 indexmap = { version = "1.6" }
 thiserror = "1.0"
@@ -48,7 +48,7 @@ maintenance = { status = "actively-developed" }
 
 [features]
 default = []
-enable-serde = ["serde", "indexmap/serde-1", "hc-wasmer-types/enable-serde" ]
+enable-serde = ["serde", "indexmap/serde-1", "wasmer-types/enable-serde" ]
 
 [package.metadata.docs.rs]
 rustc-args = ["--cfg", "docsrs"]
