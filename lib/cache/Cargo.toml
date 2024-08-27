@@ -13,7 +13,7 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-hc-wasmer = { path = "../api", version = "=4.3.6-hc.0", default-features = false }
+wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.0", default-features = false }
 hex = "0.4"
 thiserror = "1"
 blake3 = "1.0"
@@ -26,8 +26,8 @@ clap_derive = { version = "=4.4.7" }
 clap_lex = { version = "=0.6.0" }
 tempfile = "3.6.0"
 rand = "0.8.3"
-hc-wasmer = { path = "../api", version = "=4.3.6-hc.0", default-features = false, features = ["sys", "cranelift"] }
-hc-wasmer-compiler-singlepass = { path = "../compiler-singlepass", version = "=4.3.6-hc.0" }
+wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.0", default-features = false, features = ["sys", "cranelift"] }
+wasmer-compiler-singlepass = { package = "hc-wasmer-compiler-singlepass", path = "../compiler-singlepass", version = "=4.3.6-hc.0" }
 
 [features]
 default = ["filesystem"]
@@ -35,5 +35,5 @@ filesystem = []
 blake3-pure = ["blake3/pure"]
 
 [package.metadata.docs.rs]
-features = ["hc-wasmer/sys"]
+features = ["wasmer/sys"]
 rustc-args = ["--cfg", "docsrs"]
