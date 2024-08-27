@@ -12,21 +12,21 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-wasmer = { version = "=4.3.6", path = "lib/api", default-features = false }
-wasmer-compiler = { version = "=4.3.6", path = "lib/compiler", features = [
+hc-wasmer = { version = "=4.3.6", path = "lib/api", default-features = false }
+hc-wasmer-compiler = { version = "=4.3.6", path = "lib/compiler", features = [
     "compiler",
 
 ], optional = true }
-wasmer-compiler-cranelift = { version = "=4.3.6", path = "lib/compiler-cranelift", optional = true }
-wasmer-compiler-singlepass = { version = "=4.3.6", path = "lib/compiler-singlepass", optional = true }
-wasmer-compiler-llvm = { version = "=4.3.6", path = "lib/compiler-llvm", optional = true }
-wasmer-emscripten = { version = "=4.3.6", path = "lib/emscripten", optional = true }
-wasmer-wasix = { path = "lib/wasix", optional = true }
-wasmer-wast = { version = "=4.3.6", path = "tests/lib/wast", optional = true }
-wasi-test-generator = { version = "=4.3.6", path = "tests/wasi-wast", optional = true }
-wasmer-cache = { version = "=4.3.6", path = "lib/cache", optional = true }
-wasmer-types = { version = "=4.3.6", path = "lib/types" }
-wasmer-middlewares = { version = "=4.3.6", path = "lib/middlewares", optional = true }
+hc-wasmer-compiler-cranelift = { version = "=4.3.6", path = "lib/compiler-cranelift", optional = true }
+hc-wasmer-compiler-singlepass = { version = "=4.3.6", path = "lib/compiler-singlepass", optional = true }
+hc-wasmer-compiler-llvm = { version = "=4.3.6", path = "lib/compiler-llvm", optional = true }
+#hc-wasmer-emscripten = { version = "=4.3.6", path = "lib/emscripten", optional = true }
+#hc-wasmer-wasix = { path = "lib/wasix", optional = true }
+#hc-wasmer-wast = { version = "=4.3.6", path = "tests/lib/wast", optional = true }
+#hc-wasi-test-generator = { version = "=4.3.6", path = "tests/wasi-wast", optional = true }
+hc-wasmer-cache = { version = "=4.3.6", path = "lib/cache", optional = true }
+hc-wasmer-types = { version = "=4.3.6", path = "lib/types" }
+hc-wasmer-middlewares = { version = "=4.3.6", path = "lib/middlewares", optional = true }
 
 # Third party dependencies
 cfg-if = "1.0"
@@ -39,43 +39,43 @@ crossbeam-queue = "0.3.8"
 
 [workspace]
 members = [
-	"fuzz",
+#	"fuzz",
 	"lib/api",
-	"lib/api/macro-wasmer-universal-test",
-	"lib/backend-api",
-	"lib/c-api",
-	"lib/c-api/examples/wasmer-capi-examples-runner",
-	"lib/c-api/tests/wasmer-c-api-test-runner",
+#	"lib/api/macro-wasmer-universal-test",
+#	"lib/backend-api",
+#	"lib/c-api",
+#	"lib/c-api/examples/wasmer-capi-examples-runner",
+#	"lib/c-api/tests/wasmer-c-api-test-runner",
 	"lib/cache",
-	"lib/cli-compiler",
-	"lib/cli",
+#	"lib/cli-compiler",
+#	"lib/cli",
 	"lib/compiler-cranelift",
 	"lib/compiler-llvm",
 	"lib/compiler-singlepass",
 	"lib/compiler",
-	"lib/config",
+#	"lib/config",
 	"lib/derive",
-	"lib/emscripten",
+#	"lib/emscripten",
 	"lib/object",
-	"lib/registry",
-	"lib/sys-utils",
+#	"lib/registry",
+#	"lib/sys-utils",
 	"lib/types",
-	"lib/virtual-io",
-	"lib/virtual-fs",
-	"lib/virtual-net",
+#	"lib/virtual-io",
+#	"lib/virtual-fs",
+#	"lib/virtual-net",
 	"lib/vm",
-	"lib/wai-bindgen-wasmer",
-	"lib/wasi-types",
-	"lib/wasix",
-	"lib/wasm-interface",
-	"lib/journal",
-	"lib/swift",
-	"tests/integration/cli",
-	"tests/integration/ios",
-	"tests/lib/compiler-test-derive",
-	"tests/lib/wast",
-	"tests/wasi-wast",
-	"tests/wasmer-argus",
+#	"lib/wai-bindgen-wasmer",
+#	"lib/wasi-types",
+#	"lib/wasix",
+#	"lib/wasm-interface",
+#	"lib/journal",
+#	"lib/swift",
+#	"tests/integration/cli",
+#	"tests/integration/ios",
+#	"tests/lib/compiler-test-derive",
+#	"tests/lib/wast",
+#	"tests/wasi-wast",
+#	"tests/wasmer-argus",
 ]
 resolver = "2"
 
@@ -86,12 +86,12 @@ homepage = "https://wasmer.io/"
 license = "MIT"
 repository = "https://github.com/wasmerio/wasmer"
 rust-version = "1.74"
-version = "4.3.6"
+version = "4.3.6-hc.0"
 
 [workspace.dependencies]
 # Repo-local crates
 wasmer-config = { path = "./lib/config" }
-wasmer-wasix = { path = "./lib/wasix" }
+#wasmer-wasix = { path = "./lib/wasix" }
 
 # Wasmer-owned crates
 webc = { version = "6.0.0-rc1", default-features = false, features = ["package"] }
@@ -121,7 +121,7 @@ glob = "0.3"
 rustc_version = "0.4"
 
 [dev-dependencies]
-wasmer = { version = "=4.3.6", path = "lib/api", features = [
+hc-wasmer = { version = "=4.3.6", path = "lib/api", features = [
     "compiler",
     "singlepass",
     "sys",
@@ -150,34 +150,34 @@ tracing-subscriber = { version = "0.3", default-features = false, features = [
 # since we might want to autoconfigure them depending on the availability on the host.
 default = [
 	"wat",
-	"wast",
+#	"wast",
 	"cache",
-	"wasi",
+#	"wasi",
 	"engine",
-	"emscripten",
+#	"emscripten",
 	"middlewares",
 ]
 # backend means that the `wasmer` crate will be compiled with the `wasmer-compiler` or the `jsc`.
 # That means: that is able to execute modules
 backend = []
-jsc = ["wasmer/jsc", "backend", "wat", "wasmer/std"]
-wamr = ["wasmer/wamr"]
+jsc = ["hc-wasmer/jsc", "backend", "wat", "hc-wasmer/std"]
+wamr = ["hc-wasmer/wamr"]
 engine = ["universal"]
 universal = []
-cache = ["wasmer-cache"]
-wast = ["wasmer-wast"]
-wasi = ["wasmer-wasix"]
-emscripten = ["wasmer-emscripten"]
-wat = ["wasmer/wat"]
-compiler = ["wasmer/compiler", "backend", "wasmer-compiler/translator"]
-singlepass = ["compiler", "wasmer-compiler-singlepass", "wasmer/singlepass"]
-cranelift = ["compiler", "wasmer-compiler-cranelift", "wasmer/cranelift"]
-llvm = ["compiler", "wasmer-compiler-llvm", "wasmer/llvm"]
-middlewares = ["wasmer-middlewares"]
-wasmer-artifact-load = ["wasmer-compiler/wasmer-artifact-load"]
-wasmer-artifact-create = ["wasmer-compiler/wasmer-artifact-create"]
-static-artifact-load = ["wasmer-compiler/static-artifact-load"]
-static-artifact-create = ["wasmer-compiler/static-artifact-create"]
+cache = ["hc-wasmer-cache"]
+#wast = ["hc-wasmer-wast"]
+#wasi = ["hc-wasmer-wasix"]
+#emscripten = ["hc-wasmer-emscripten"]
+wat = ["hc-wasmer/wat"]
+compiler = ["hc-wasmer/compiler", "backend", "hc-wasmer-compiler/translator"]
+singlepass = ["compiler", "hc-wasmer-compiler-singlepass", "hc-wasmer/singlepass"]
+cranelift = ["compiler", "hc-wasmer-compiler-cranelift", "hc-wasmer/cranelift"]
+llvm = ["compiler", "hc-wasmer-compiler-llvm", "hc-wasmer/llvm"]
+middlewares = ["hc-wasmer-middlewares"]
+hc-wasmer-artifact-load = ["hc-wasmer-compiler/wasmer-artifact-load"]
+hc-wasmer-artifact-create = ["hc-wasmer-compiler/wasmer-artifact-create"]
+static-artifact-load = ["hc-wasmer-compiler/static-artifact-load"]
+static-artifact-create = ["hc-wasmer-compiler/static-artifact-create"]
 
 # Testing features
 test-singlepass = ["singlepass"]
@@ -204,7 +204,7 @@ opt-level = 3
 opt-level = 3
 [profile.dev.package.rkyv]
 opt-level = 3
-[profile.dev.package.wasmer-types]
+[profile.dev.package.hc-wasmer-types]
 opt-level = 3
 [profile.dev.package.weezl]
 opt-level = 3

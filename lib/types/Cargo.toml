@@ -1,5 +1,5 @@
 [package]
-name = "wasmer-types"
+name = "hc-wasmer-types"
 description = "Wasmer Common Types"
 categories = ["wasm", "no-std", "data-structures"]
 keywords = ["wasm", "webassembly", "types"]

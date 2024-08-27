@@ -1,5 +1,5 @@
 [package]
-name = "wasmer-compiler-llvm"
+name = "hc-wasmer-compiler-llvm"
 description = "LLVM compiler for Wasmer WebAssembly runtime"
 categories = ["wasm"]
 keywords = ["wasm", "webassembly", "compiler", "llvm"]
@@ -14,11 +14,11 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-wasmer-compiler = { path = "../compiler", version = "=4.3.6", features = [
+hc-wasmer-compiler = { path = "../compiler", version = "=4.3.6-hc.0", features = [
     "translator", "compiler"
 ] }
-wasmer-vm = { path = "../vm", version = "=4.3.6" }
-wasmer-types = { path = "../types", version = "=4.3.6" }
+hc-wasmer-vm = { path = "../vm", version = "=4.3.6-hc.0" }
+hc-wasmer-types = { path = "../types", version = "=4.3.6-hc.0" }
 target-lexicon = { version = "0.12.2", default-features = false }
 smallvec = "1.6"
 object = { version = "0.28.3", default-features = false, features = ["read"] }

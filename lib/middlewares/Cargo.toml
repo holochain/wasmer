@@ -1,5 +1,5 @@
 [package]
-name = "wasmer-middlewares"
+name = "hc-wasmer-middlewares"
 description = "A collection of various useful middlewares"
 categories = ["wasm"]
 keywords = ["webassembly", "wasm"]
@@ -13,12 +13,12 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-wasmer = { path = "../api", version = "=4.3.6", default-features = false, features = ["compiler"] }
-wasmer-types = { path = "../types", version = "=4.3.6" }
-wasmer-vm = { path = "../vm", version = "=4.3.6" }
+hc-wasmer = { path = "../api", version = "=4.3.6-hc.0", default-features = false, features = ["compiler"] }
+hc-wasmer-types = { path = "../types", version = "=4.3.6-hc.0" }
+hc-wasmer-vm = { path = "../vm", version = "=4.3.6-hc.0" }
 
 [dev-dependencies]
-wasmer = { path = "../api", version = "=4.3.6", features = ["compiler"] }
+hc-wasmer = { path = "../api", version = "=4.3.6-hc.0", features = ["compiler"] }
 
 [badges]
 maintenance = { status = "actively-developed" }
