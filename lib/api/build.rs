@@ -1,3 +1,6 @@
+const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
+const WAMR_DIR: &str = "wasm-micro-runtime-WAMR-2.1.0";
+
 fn main() {
     #[cfg(feature = "wamr")]
     {
@@ -7,6 +10,23 @@ fn main() {
         let crate_root = env::var("CARGO_MANIFEST_DIR").unwrap();
         let wamr_dir = PathBuf::from(&crate_root).join("third_party").join("wamr");
 
+        let zip = ureq::get(WAMR_ZIP).call().expect("failed to download wamr");
+
+        let mut zip_data = Vec::new();
+        zip.into_reader().read_to_end(&mut zip_data).expect("failed to download wamr");
+
+        zip::read::ZipArchive::new(std::io::Cursor::new(zip_data))
+            .expect("failed to open wamr zip file")
+            .extract(&crate_root)
+            .expect("failed to extract wamr zip file");
+
+        let _ = std::fs::remove_dir_all(&wamr_dir);
+
+        let zip_dir = PathBuf::from(&crate_root).join(WAMR_DIR);
+
+        std::fs::rename(zip_dir, &wamr_dir).expect("failed to rename wamr dir");
+
+        /*
         let mut fetch_submodules = std::process::Command::new("git");
         fetch_submodules
             .current_dir(crate_root)
@@ -19,6 +39,7 @@ fn main() {
         if let Err(e) = res {
             panic!("fetching submodules failed: {e}");
         }
+        */
 
         let dst = Config::new(wamr_dir.clone())
             .always_configure(true)

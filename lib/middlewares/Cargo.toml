@@ -13,12 +13,12 @@ rust-version.workspace = true
 version.workspace = true
 
 [dependencies]
-wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.0", default-features = false, features = ["compiler"] }
-wasmer-types = { package = "hc-wasmer-types", path = "../types", version = "=4.3.6-hc.0" }
-wasmer-vm = { package = "hc-wasmer-vm", path = "../vm", version = "=4.3.6-hc.0" }
+wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.1", default-features = false, features = ["compiler"] }
+wasmer-types = { package = "hc-wasmer-types", path = "../types", version = "=4.3.6-hc.1" }
+wasmer-vm = { package = "hc-wasmer-vm", path = "../vm", version = "=4.3.6-hc.1" }
 
 [dev-dependencies]
-wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.0", features = ["compiler"] }
+wasmer = { package = "hc-wasmer", path = "../api", version = "=4.3.6-hc.1", features = ["compiler"] }
 
 [badges]
 maintenance = { status = "actively-developed" }
