@@ -41,7 +41,8 @@ fn main() {
         }
         */
 
-        let mut dst_config = Config::new(wamr_dir.clone())
+        let mut cmake_config = Config::new(wamr_dir.clone());
+        let mut dst_config = cmake_config
             .always_configure(true)
             //.generator("Unix Makefiles")
             .define(
@@ -68,7 +69,7 @@ fn main() {
             .define("WAMR_BUILD_MULTI_MODULE", "0")
             .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
         if cfg!(feature = "wamr-fast-interp") {
-            dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
+            dst_config = dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
         }
         let dst = dst_config.build();
 
