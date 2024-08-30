@@ -1,5 +1,5 @@
 // const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
-const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/2.zip"
+const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/2.zip";
 const WAMR_DIR: &str = "wasm-micro-runtime-WAMR-2.1.0";
 
 fn main() {
