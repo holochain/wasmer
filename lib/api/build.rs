@@ -60,13 +60,13 @@ fn main() {
             .define("WAMR_BUILD_BULK_MEMORY", "1")
             .define("WAMR_BUILD_REF_TYPES", "1")
             .define("WAMR_BUILD_SIMD", "1")
-            .define("WAMR_ENABLE_FAST_INTERP", "1")
             .define("WAMR_BUILD_LIB_PTHREAD", "1")
             .define("WAMR_BUILD_LIB_WASI_THREADS", "0")
             .define("WAMR_BUILD_LIBC_WASI", "0")
             .define("WAMR_BUILD_LIBC_BUILTIN", "0")
             .define("WAMR_BUILD_SHARED_MEMORY", "1")
             .define("WAMR_BUILD_MULTI_MODULE", "0")
+            .define("WASM_ENABLE_FAST_INTERP", "1")
             .define("WAMR_DISABLE_HW_BOUND_CHECK", "1")
             .build();
 
