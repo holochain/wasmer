@@ -44,7 +44,7 @@ fn main() {
         let mut cmake_config = Config::new(wamr_dir.clone());
         let mut dst_config = cmake_config
             .always_configure(true)
-            //.generator("Unix Makefiles")
+            .generator("Unix Makefiles")
             .define(
                 "CMAKE_BUILD_TYPE",
                 if cfg!(debug_assertions) {
