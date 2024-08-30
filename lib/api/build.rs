@@ -72,7 +72,7 @@ fn main() {
         if cfg!(not(target_os = "windows")) {
             dst_config = dst_config.generator("Unix Makefiles");
         } else {
-            dst_config = dst_config.generator("MinGW Makefiles");
+            dst_config = dst_config.generator("NMake Makefiles");
         }
         if cfg!(feature = "wamr-fast-interp") {
             dst_config = dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
