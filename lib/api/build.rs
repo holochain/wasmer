@@ -41,7 +41,7 @@ fn main() {
         }
         */
 
-        let dst = Config::new(wamr_dir.clone())
+        let mut dst_config = Config::new(wamr_dir.clone())
             .always_configure(true)
             //.generator("Unix Makefiles")
             .define(
@@ -66,9 +66,11 @@ fn main() {
             .define("WAMR_BUILD_LIBC_BUILTIN", "0")
             .define("WAMR_BUILD_SHARED_MEMORY", "1")
             .define("WAMR_BUILD_MULTI_MODULE", "0")
-            .define("WASM_ENABLE_FAST_INTERP", "1")
-            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1")
-            .build();
+            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
+        if cfg!(feature = "wamr-fast-interp") {
+            dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
+        }
+        let dst = dst_config.build();
 
         // Check output of `cargo build --verbose`, should see something like:
         // -L native=/path/runng/target/debug/build/runng-sys-abc1234/out

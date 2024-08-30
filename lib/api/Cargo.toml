@@ -113,7 +113,7 @@ llvm = ["compiler", "wasmer-compiler-llvm"]
 
 # - Engines.
 engine = ["sys"]
-wamr = ["wasm-c-api", "std", "wat"]
+wamr = ["wasm-c-api", "std", "wat", "wamr-fast-interp"]
 wasm-c-api = ["wasm-types-polyfill"]
 
 # - Deprecated features.
@@ -122,6 +122,10 @@ jit = ["engine"]
 # Features for `js`.
 js = ["wasm-bindgen", "js-sys"]
 js-default = ["js", "std", "wasm-types-polyfill"]
+
+# Features for 'wamr'
+wamr-fast-interp = []
+wamr-slow-interp = ["wasm-c-api", "std", "wat"]
 
 wasm-types-polyfill = ["wasmparser"]
 
