@@ -1,6 +1,7 @@
-// const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
-const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/3.zip";
-const WAMR_DIR: &str = "wasm-micro-runtime-3";
+const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
+//const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/3.zip";
+const WAMR_DIR: &str = "wasm-micro-runtime-WAMR-2.1.0";
+//const WAMR_DIR: &str = "wasm-micro-runtime-3";
 
 fn main() {
     #[cfg(feature = "wamr")]
@@ -70,6 +71,8 @@ fn main() {
             .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
         if cfg!(not(target_os = "windows")) {
             dst_config = dst_config.generator("Unix Makefiles");
+        } else {
+            dst_config = dst_config.generator("MinGW Makefiles");
         }
         if cfg!(feature = "wamr-fast-interp") {
             dst_config = dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
