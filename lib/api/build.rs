@@ -43,7 +43,7 @@ fn main() {
         }
         */
 
-        let mut cmake_config = Config::new(wamr_dir.clone());
+        let mut cmake_config = Config::new(".");
         let mut dst_config = cmake_config
             .always_configure(true)
             .define(
