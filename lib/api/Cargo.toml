@@ -147,7 +147,7 @@ static-artifact-create = ["wasmer-compiler/static-artifact-create"]
 
 [build-dependencies]
 bindgen = "0.69.4"
-cmake = "0.1.50"
+cmake = { git = "https://github.com/mattyg/cmake-rs", branch = "fix/invalid-arg-mingw-generator" }
 ureq = "2.10.1"
 zip = { version = "2.2.0", default-features = false, features = [ "deflate" ] }
 

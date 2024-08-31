@@ -380,8 +380,7 @@ checksum = "702fc72eb24e5a1e48ce58027a675bc24edd52096d5397d4aea7c6dd9eca0bd1"
 [[package]]
 name = "cmake"
 version = "0.1.51"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb1e43aa7fd152b1f968787f7dbcdeb306d1867ff373c69955211876c053f91a"
+source = "git+https://github.com/mattyg/cmake-rs?branch=fix/invalid-arg-mingw-generator#af4d756c898c986829499de748d9201a3739a0b7"
 dependencies = [
  "cc",
 ]
