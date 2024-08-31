@@ -1,7 +1,7 @@
-const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
-//const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/3.zip";
-const WAMR_DIR: &str = "wasm-micro-runtime-WAMR-2.1.0";
-//const WAMR_DIR: &str = "wasm-micro-runtime-3";
+// const WAMR_ZIP: &str = "https://github.com/bytecodealliance/wasm-micro-runtime/archive/refs/tags/WAMR-2.1.0.zip";
+const WAMR_ZIP: &str = "https://github.com/mattyg/wasm-micro-runtime/archive/refs/tags/4.zip";
+//const WAMR_DIR: &str = "wasm-micro-runtime-WAMR-2.1.0";
+const WAMR_DIR: &str = "wasm-micro-runtime-4";
 
 fn main() {
     #[cfg(feature = "wamr")]
@@ -43,7 +43,7 @@ fn main() {
         }
         */
 
-        let mut cmake_config = Config::new(".");
+        let mut cmake_config = Config::new(wamr_dir.clone());
         let mut dst_config = cmake_config
             .always_configure(true)
             .define(
@@ -73,6 +73,7 @@ fn main() {
             dst_config = dst_config.generator("MinGW Makefiles");
         } else {
             dst_config = dst_config.generator("Unix Makefiles");
+
         }
         if cfg!(feature = "wamr-fast-interp") {
             dst_config = dst_config.define("WASM_ENABLE_FAST_INTERP", "1");
