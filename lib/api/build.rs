@@ -67,7 +67,7 @@ fn main() {
             .define("WAMR_BUILD_LIBC_WASI", "0")
             .define("WAMR_BUILD_LIBC_BUILTIN", "0")
             .define("WAMR_BUILD_SHARED_MEMORY", "1")
-            .define("WAMR_BUILD_STATIC", "1")
+            .define("WAMR_BUILD_SHARED", "1")
             .define("WAMR_BUILD_MULTI_MODULE", "0")
             .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
         if cfg!(target_os = "windows") {
