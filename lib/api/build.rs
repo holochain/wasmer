@@ -41,7 +41,8 @@ fn main() {
         }
         */
 
-        let dst = Config::new(wamr_dir.clone())
+        let mut dst_config = Config::new(wamr_dir.as_path());
+        dst_config
             .always_configure(true)
             .generator("Unix Makefiles")
             .define(
@@ -67,18 +68,21 @@ fn main() {
             .define("WAMR_BUILD_LIBC_BUILTIN", "0")
             .define("WAMR_BUILD_SHARED_MEMORY", "1")
             .define("WAMR_BUILD_MULTI_MODULE", "0")
-            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1")
-            #[cfg(target_os = "linux")]
-            .define("WAMR_BUILD_PLATFORM", "linux")
-            #[cfg(target_os = "android")]
-            .define("WAMR_BUILD_PLATFORM", "android")
-            #[cfg(target_os = "windows")]
-            .define("WAMR_BUILD_PLATFORM", "windows")
-            #[cfg(target_os = "darwin")]
-            .define("WAMR_BUILD_PLATFORM", "darwin")
-            #[cfg(target_os = "freebsd")]
-            .define("WAMR_BUILD_PLATFORM", "freebsd")
-            .build();
+            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
+        
+        // Set WAMR_BUILD_PLATFORM to the cargo target
+        if cfg!(target_os = "linux") {
+            dst_config.define("WAMR_BUILD_PLATFORM", "linux");
+        } else if cfg!(target_os = "windows") {
+            dst_config.define("WAMR_BUILD_PLATFORM", "windows");
+        } else if cfg!(target_os = "darwin") {
+            dst_config.define("WAMR_BUILD_PLATFORM", "darwin");
+        } else if cfg!(target_os = "android") {
+            dst_config.define("WAMR_BUILD_PLATFORM", "android");
+        } else if cfg!(target_os = "freebsd") {
+            dst_config.define("WAMR_BUILD_PLATFORM", "freebsd");
+        }
+        let dst = dst_config.build();
 
         // Check output of `cargo build --verbose`, should see something like:
         // -L native=/path/runng/target/debug/build/runng-sys-abc1234/out
