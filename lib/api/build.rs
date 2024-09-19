@@ -41,7 +41,7 @@ fn main() {
         }
         */
 
-        let mut wamr_platform_dir = wamr_dir.join("product-mini-platforms");
+        let mut wamr_platform_dir = wamr_dir.join("product-mini/platforms");
 
         if cfg!(target_os = "linux") {
             wamr_platform_dir = wamr_platform_dir.join("linux");
