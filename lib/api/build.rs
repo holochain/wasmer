@@ -8,7 +8,7 @@ fn main() {
         use std::{env, path::PathBuf};
 
         let crate_root = env::var("CARGO_MANIFEST_DIR").unwrap();
-        let wamr_dir = PathBuf::from(&crate_root).join("third_party").join("wamr");
+        let wamr_dir = PathBuf::from(&crate_root).join("third_party/wamr");
 
         let zip = ureq::get(WAMR_ZIP).call().expect("failed to download wamr");
 
@@ -41,7 +41,23 @@ fn main() {
         }
         */
 
-        let mut dst_config = Config::new(wamr_dir.as_path());
+        let mut wamr_platform_dir = wamr_dir.join("product-mini-platforms");
+
+        if cfg!(target_os = "linux") {
+            wamr_platform_dir = wamr_platform_dir.join("linux");
+        } else if cfg!(target_os = "windows") {
+            wamr_platform_dir = wamr_platform_dir.join("windows");
+        } else if cfg!(target_os = "darwin") {
+            wamr_platform_dir = wamr_platform_dir.join("darwin");
+        } else if cfg!(target_os = "android") {
+            wamr_platform_dir = wamr_platform_dir.join("android");
+        } else if cfg!(target_os = "freebsd") {
+            wamr_platform_dir = wamr_platform_dir.join("freebsd");
+        } else {
+            // compile_error!("Supported target_os are linux, windows, android, freebsd");
+        }
+
+        let mut dst_config = Config::new(wamr_platform_dir.as_path());
         dst_config
             .always_configure(true)
             .generator("Unix Makefiles")
@@ -61,7 +77,7 @@ fn main() {
             .define("WAMR_BUILD_BULK_MEMORY", "1")
             .define("WAMR_BUILD_REF_TYPES", "1")
             .define("WAMR_BUILD_SIMD", "1")
-            .define("WAMR_ENABLE_FAST_INTERP", "1")
+            .define("WAMR_BUILD_FAST_INTERP", "1")
             .define("WAMR_BUILD_LIB_PTHREAD", "1")
             .define("WAMR_BUILD_LIB_WASI_THREADS", "0")
             .define("WAMR_BUILD_LIBC_WASI", "0")
@@ -71,17 +87,17 @@ fn main() {
             .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
         
         // Set WAMR_BUILD_PLATFORM to the cargo target
-        if cfg!(target_os = "linux") {
-            dst_config.define("WAMR_BUILD_PLATFORM", "linux");
-        } else if cfg!(target_os = "windows") {
-            dst_config.define("WAMR_BUILD_PLATFORM", "windows");
-        } else if cfg!(target_os = "darwin") {
-            dst_config.define("WAMR_BUILD_PLATFORM", "darwin");
-        } else if cfg!(target_os = "android") {
-            dst_config.define("WAMR_BUILD_PLATFORM", "android");
-        } else if cfg!(target_os = "freebsd") {
-            dst_config.define("WAMR_BUILD_PLATFORM", "freebsd");
-        }
+        // if cfg!(target_os = "linux") {
+        //     dst_config.define("WAMR_BUILD_PLATFORM", "linux");
+        // } else if cfg!(target_os = "windows") {
+        //     dst_config.define("WAMR_BUILD_PLATFORM", "windows");
+        // } else if cfg!(target_os = "darwin") {
+        //     dst_config.define("WAMR_BUILD_PLATFORM", "darwin");
+        // } else if cfg!(target_os = "android") {
+        //     dst_config.define("WAMR_BUILD_PLATFORM", "android");
+        // } else if cfg!(target_os = "freebsd") {
+        //     dst_config.define("WAMR_BUILD_PLATFORM", "freebsd");
+        // }
         let dst = dst_config.build();
 
         // Check output of `cargo build --verbose`, should see something like:
