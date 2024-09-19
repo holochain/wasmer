@@ -1016,7 +1016,7 @@ checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
 
 [[package]]
 name = "hc-wasmer"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "anyhow",
  "bindgen",
@@ -1056,7 +1056,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-cache"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "blake3",
  "clap",
@@ -1074,7 +1074,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-compiler"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "backtrace",
  "bytes",
@@ -1105,7 +1105,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-compiler-cranelift"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "cranelift-codegen",
  "cranelift-entity",
@@ -1124,7 +1124,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-compiler-llvm"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "byteorder",
  "cc",
@@ -1146,7 +1146,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-compiler-singlepass"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "byteorder",
  "dynasm",
@@ -1165,7 +1165,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-derive"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "compiletest_rs",
  "hc-wasmer-types",
@@ -1177,7 +1177,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-middlewares"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "hc-wasmer",
  "hc-wasmer-types",
@@ -1186,7 +1186,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-object"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "hc-wasmer-types",
  "object 0.29.0",
@@ -1195,7 +1195,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-types"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "bytecheck",
  "enum-iterator",
@@ -1216,7 +1216,7 @@ dependencies = [
 
 [[package]]
 name = "hc-wasmer-vm"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "backtrace",
  "cc",
@@ -2795,7 +2795,7 @@ dependencies = [
 
 [[package]]
 name = "wasmer-workspace"
-version = "4.3.6-hc.0"
+version = "4.3.6-hc.1"
 dependencies = [
  "anyhow",
  "build-deps",
