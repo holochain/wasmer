@@ -69,6 +69,7 @@ fn main() {
         let wamr_platform_dir = wamr_dir.join("product-mini/platforms").join(target_os);
         let dst = Config::new(wamr_platform_dir.as_path())
             .always_configure(true)
+            .configure_arg("--fresh")
             .generator("Unix Makefiles")
             .no_build_target(true)
             .define(
