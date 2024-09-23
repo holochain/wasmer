@@ -8,23 +8,47 @@ fn main() {
         use std::{env, path::PathBuf};
 
         let crate_root = env::var("CARGO_MANIFEST_DIR").unwrap();
-        let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
+
+        // Read target os from cargo env
+        // Transform from cargo value to valid wasm-micro-runtime os
+        let target_os = match env::var("CARGO_CFG_TARGET_OS").unwrap().as_str() {
+            "linux" => "linux",
+            "windows" => "windows",
+            "macos" => "darwin",
+            "freebsd" => "freebsd",
+            "android" => "android",
+            "ios" => "ios",
+            other => panic!("Unsupported CARGO_CFG_TARGET_OS: {}", other),
+        };
+
+        // Read target arch from cargo env
+        // Transform from cargo value to valid wasm-micro-runtime WAMR_BUILD_TARGET
+        let target_arch = match env::var("CARGO_CFG_TARGET_ARCH").unwrap().as_str() {
+            "x86" => "X86_32",
+            "x86_64" => "X86_64",
+            "arm" => "ARM",
+            "aarch64" => "AARCH64",
+            "mips" => "MIPS",
+            "powerpc" => "POWERPC",
+            "powerpc64" => "POWERPC64",
+            other => panic!("Unsupported CARGO_CFG_TARGET_ARCH: {}", other),
+        };
+        
+        // Cleanup tmp data from prior builds      
         let wamr_dir = PathBuf::from(&crate_root).join("third_party/wamr");
+        let zip_dir = PathBuf::from(&crate_root).join(WAMR_DIR);
+        let _ = std::fs::remove_dir_all(&wamr_dir);
+        let _ = std::fs::remove_dir_all(&zip_dir);
 
+        // Fetch & extract wasm-micro-runtime source
         let zip = ureq::get(WAMR_ZIP).call().expect("failed to download wamr");
-
         let mut zip_data = Vec::new();
         zip.into_reader().read_to_end(&mut zip_data).expect("failed to download wamr");
-
         zip::read::ZipArchive::new(std::io::Cursor::new(zip_data))
             .expect("failed to open wamr zip file")
             .extract(&crate_root)
             .expect("failed to extract wamr zip file");
-
         let _ = std::fs::remove_dir_all(&wamr_dir);
-
-        let zip_dir = PathBuf::from(&crate_root).join(WAMR_DIR);
-
         std::fs::rename(zip_dir, &wamr_dir).expect("failed to rename wamr dir");
 
         /*
@@ -42,18 +66,11 @@ fn main() {
         }
         */
 
-        let mut wamr_platform_dir = wamr_dir.join("product-mini/platforms");
-
-        if target_os == "linux" || target_os == "windows" || target_os =="darwin" || target_os == "android" || target_os == "freebsd" {
-            wamr_platform_dir = wamr_platform_dir.join("linux");
-        } else {
-            compile_error!("Supported target_os are linux, windows, android, freebsd");
-        }
-
-        let mut dst_config = Config::new(wamr_platform_dir.as_path());
-        dst_config
+        let wamr_platform_dir = wamr_dir.join("product-mini/platforms").join(target_os);
+        let dst = Config::new(wamr_platform_dir.as_path())
             .always_configure(true)
             .generator("Unix Makefiles")
+            .no_build_target(true)
             .define(
                 "CMAKE_BUILD_TYPE",
                 if cfg!(debug_assertions) {
@@ -77,15 +94,9 @@ fn main() {
             .define("WAMR_BUILD_LIBC_BUILTIN", "0")
             .define("WAMR_BUILD_SHARED_MEMORY", "1")
             .define("WAMR_BUILD_MULTI_MODULE", "0")
-            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1");
-        
-        // Set WAMR_BUILD_PLATFORM to the cargo target
-        // if target_os == "linux" || target_os == "windows" || target_os =="darwin" || target_os == "android" || target_os == "freebsd" {
-        //     dst_config.define("WAMR_BUILD_PLATFORM", target_os);
-        // } else {
-        //     compile_error!("Supported target_os are linux, windows, android, freebsd");
-        // }
-        let dst = dst_config.build();
+            .define("WAMR_DISABLE_HW_BOUND_CHECK", "1")
+            .define("WAMR_BUILD_TARGET", target_arch)
+            .build();
 
         // Check output of `cargo build --verbose`, should see something like:
         // -L native=/path/runng/target/debug/build/runng-sys-abc1234/out
